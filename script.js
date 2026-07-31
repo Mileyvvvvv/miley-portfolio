@@ -105,23 +105,14 @@ const musicButton = document.querySelector('.music-player');
 const backgroundMusic = new Audio('assets/music/jellyfish-background.mp3');
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.32;
-backgroundMusic.preload = 'auto';
-let musicManuallyPaused = false;
+backgroundMusic.preload = 'metadata';
 function showMusicState(playing) { musicButton.classList.toggle('playing', playing); musicButton.setAttribute('aria-pressed',playing); }
 async function playBackgroundMusic() {
-  if (musicManuallyPaused) return;
   try { await backgroundMusic.play(); showMusicState(true); } catch { showMusicState(false); }
 }
-musicButton.addEventListener('click', () => {
-  if (backgroundMusic.paused) { musicManuallyPaused = false; playBackgroundMusic(); }
-  else { musicManuallyPaused = true; backgroundMusic.pause(); }
-});
+musicButton.addEventListener('click', () => backgroundMusic.paused ? playBackgroundMusic() : backgroundMusic.pause());
 backgroundMusic.addEventListener('pause', () => showMusicState(false));
 backgroundMusic.addEventListener('play', () => showMusicState(true));
-window.addEventListener('load', playBackgroundMusic);
-window.addEventListener('pageshow', playBackgroundMusic);
-document.addEventListener('WeixinJSBridgeReady', playBackgroundMusic, false);
-['pointerdown', 'touchstart', 'keydown'].forEach(event => document.addEventListener(event, playBackgroundMusic, { once:true, passive:true }));
 
 // React Bits Aurora adapted for this dependency-free static site.
 (() => {
