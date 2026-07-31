@@ -106,6 +106,11 @@ nav a:hover, nav a.active { color:var(--red); transform:rotate(-3deg); }
 /* Chinese typography: KaiTi for all copy, with a clear title/body hierarchy. */
 :root { --chinese-font: "PortfolioKaiTi", "KaiTi", "STKaiti", "Kaiti SC", serif; }
 body { font-family:var(--chinese-font); font-synthesis:weight; }
+.contact-cards { display:inline-flex; align-items:stretch; gap:14px; margin-top:22px; }
+.contact-cards .contact-card { min-width:175px; margin-top:0; justify-content:center; }
+.social-card { background:#f5d2d4; transform:rotate(2deg); }
+.social-card span { font:15px 'DM Mono',monospace; }
+.social-card a { font:inherit; font-weight:700; }
 nav a, .home-links button, .page-content h2, .placeholder-card strong,
 .article-card a, .film-details h2, #audio .episode span, .read-script,
 .polaroid b, .note b, .film b, .blue-card b, .swatch b {
@@ -117,4 +122,9 @@ nav a, .home-links button, .page-content h2, .placeholder-card strong,
 .blue-card span, .swatch span {
   font-family:var(--chinese-font) !important;
   font-weight:400;
+}
+@media (max-width:760px) {
+  .contact-cards { gap:8px; margin-top:17px; }
+  .contact-cards .contact-card { min-width:0; width:min(42vw,175px); padding:8px 9px; }
+  .social-card span, .contact-card a { font-size:12px; }
 }
