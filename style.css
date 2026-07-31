@@ -42,3 +42,61 @@ nav a:hover, nav a.active { color:var(--red); transform:rotate(-3deg); }
 .film-details h2 { font-family:'MileyHand','KaiTi',cursive; font-weight:400; }.music-hint { position:absolute; top:51px; right:-20px; width:105px; color:#e34a47; font:14px 'MileyHand','KaiTi',cursive; text-align:center; opacity:0; pointer-events:none; transform:rotate(-4deg); }.home-mode .music-hint { opacity:1; animation:music-hint-bob 1.5s ease-in-out infinite; }.music-player.playing .music-hint { opacity:0; animation:none; }.home-view .polaroid { animation:gentle-sway-a 4.8s ease-in-out infinite; }.home-view .note { animation:gentle-sway-b 5.6s ease-in-out infinite .5s; }.home-view .film { animation:gentle-sway-c 5s ease-in-out infinite 1s; }.home-view .blue-card { animation:gentle-sway-d 5.4s ease-in-out infinite .3s; }.home-view .swatch { animation:gentle-sway-e 4.6s ease-in-out infinite .7s; }.home-view .stamp { animation:gentle-sway-f 5.2s ease-in-out infinite 1.1s; }@keyframes music-hint-bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(-1deg)}}@keyframes gentle-sway-a{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(-8deg)}}@keyframes gentle-sway-b{0%,100%{transform:rotate(8deg)}50%{transform:rotate(5deg)}}@keyframes gentle-sway-c{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(-7deg)}}@keyframes gentle-sway-d{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(-4deg)}}@keyframes gentle-sway-e{0%,100%{transform:rotate(12deg)}50%{transform:rotate(8deg)}}@keyframes gentle-sway-f{0%,100%{transform:rotate(11deg)}50%{transform:rotate(7deg)}}
 .music-label { color:#d84440; font-size:11px; font-weight:700; letter-spacing:.6px; line-height:1.15; }.article-card a { font-family:'MileyHand','KaiTi',cursive !important; font-size:17px; line-height:1.15; }@keyframes gentle-sway-a{0%,100%{transform:rotate(-14deg) translateY(0)}50%{transform:rotate(-6deg) translateY(-5px)}}@keyframes gentle-sway-b{0%,100%{transform:rotate(10deg) translateY(0)}50%{transform:rotate(2deg) translateY(-5px)}}@keyframes gentle-sway-c{0%,100%{transform:rotate(-14deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-6px)}}@keyframes gentle-sway-d{0%,100%{transform:rotate(-11deg) translateY(0)}50%{transform:rotate(1deg) translateY(-5px)}}@keyframes gentle-sway-e{0%,100%{transform:rotate(15deg) translateY(0)}50%{transform:rotate(5deg) translateY(-5px)}}@keyframes gentle-sway-f{0%,100%{transform:rotate(14deg) translateY(0)}50%{transform:rotate(3deg) translateY(-4px)}}
 @media (max-width:760px) { .site-header { height:auto; min-height:74px; gap:10px; padding:8px 4vw; }.logo { font-size:20px; } nav { gap:8px 12px; } nav a { font-size:13px; }.music-label{display:none}.record{width:37px;height:37px}.view{min-height:calc(100vh - 108px)}.home-view{min-height:calc(100vh - 108px)}.home-copy{width:88vw;padding:70px 0}.home-copy h1{font-size:65px}.intro{font-size:14px;background:#fffafaDD;padding:8px}.collage{opacity:.55;min-width:160px;width:35vw}.collage-right{display:none}.book-view{padding:32px 2vw}.book-shell{gap:4px}.book{min-height:570px;grid-template-columns:1fr 22px 1fr;padding:5px}.book-page{padding:18px 12px}.page-content h2{font-size:29px}.page-content p,.episode{font-size:13px}.page-turn{width:34px;height:55px;font-size:40px}.rings:before{width:18px}.single-book .book-page{padding:14px}.radio-art{font-size:38px}.video-placeholder{min-height:290px}.stills{gap:6px}.still{border-width:4px} }
+
+/* Phone layout: keeps the scrapbook character without forcing desktop-width content. */
+@media (max-width: 760px) {
+  .site-header { position:sticky; top:0; display:grid; grid-template-columns:1fr auto; gap:8px; min-height:0; padding:9px 4vw; }
+  nav { grid-column:1 / -1; grid-row:2; justify-content:center; gap:6px 14px; }
+  nav a { font-size:15px; }
+  .music-player { grid-column:2; grid-row:1; margin-left:0; }
+  .music-label { display:block; font-size:9px; }
+  .record { width:40px; height:40px; }
+
+  .home-view { min-height:calc(100svh - 108px); padding:18px 18px 28px; }
+  .home-copy { width:100%; padding:112px 0 92px; }
+  .home-copy h1 { font-size:clamp(60px,19vw,78px); margin:13px 0 24px; }
+  .eyebrow { font-size:10px; }
+  .intro { max-width:34ch; padding:9px 10px; font-size:15px; line-height:1.65; white-space:normal; background:#fffafaD9; }
+  .contact-card { margin-top:17px; padding:8px 13px; }
+  .contact-card a { font-size:13px; }
+  .collage { display:none; }
+  .home-photo { width:74px; padding:4px 4px 16px; }
+  .home-photo-1 { top:26px; left:5%; transform:rotate(-9deg); }
+  .home-photo-2 { top:44px; right:5%; transform:rotate(8deg); }
+  .home-photo-3 { bottom:25px; left:6%; transform:rotate(8deg); }
+  .home-photo-4 { bottom:20px; right:5%; transform:rotate(-7deg); }
+
+  .book-view { padding:22px 12px 34px; }
+  .book-shell { display:grid; grid-template-columns:42px minmax(0,1fr) 42px; gap:0; width:100%; }
+  .book-shell > .book { grid-column:1 / -1; grid-row:1; width:100%; min-height:0; grid-template-columns:1fr; padding:7px; }
+  .book-shell > .prev { grid-column:1; grid-row:1; justify-self:start; }
+  .book-shell > .next { grid-column:3; grid-row:1; justify-self:end; }
+  .book-shell > .page-turn { z-index:4; width:38px; height:52px; font-size:40px; box-shadow:0 2px 5px #0007; }
+  .book-page { min-height:0; padding:25px 22px; overflow:visible; }
+  .book-page + .rings { height:18px; min-height:18px; background:repeating-linear-gradient(90deg,#252525 0 10px,#dad7cf 11px 18px); }
+  .rings:before { display:none; }
+  .page-content h2 { font-size:34px; }
+  .page-content p { font-size:16px; line-height:1.62; }
+  .placeholder-card:has(.experience-photo) p { font-size:15px; }
+  .experience-photo { height:min(56vw,260px); }
+  .article-card a { font-size:16px; }
+  .stills { grid-template-columns:repeat(3,1fr); gap:8px; }
+  .still { border-width:4px; }
+  #video .video-placeholder { height:auto; min-height:210px; }
+  .film-details { margin-top:13px; }
+  .film-details h2 { font-size:27px; }
+  #audio .episodes { min-height:0; }
+  .radio-art { width:min(260px,80%); margin:18px auto; font-size:46px; }
+  .modal-card { width:94vw; padding:8px; }
+  .close-modal { right:-8px; top:-13px; }
+}
+
+@media (max-width: 380px) {
+  nav { gap:5px 10px; }
+  nav a { font-size:14px; }
+  .home-copy { padding-top:102px; }
+  .intro { font-size:14px; }
+  .book-page { padding:22px 16px; }
+  .page-content h2 { font-size:30px; }
+  .book-shell > .page-turn { width:34px; }
+}
