@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Mono:wght@400;500&family=ZCOOL+XiaoWei&display=swap');
 @font-face { font-family:'MileyHand'; src:url('assets/fonts/zhaojiujiang-pen-xingshu.ttf') format('truetype'); font-display:swap; }
-@font-face { font-family:'LiuYiXingShu'; src:url('assets/fonts/fz-liuyi-hardpen-xingshu.ttf') format('truetype'); font-display:swap; }
 
 :root { --ink:#25272b; --paper:#fffdf8; --red:#e34a47; --blue:#3098d2; --yellow:#f7ce43; --line:#24272a; }
 * { box-sizing:border-box; }
