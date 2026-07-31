@@ -129,9 +129,8 @@ const musicButton = document.querySelector('.music-player');
 const backgroundMusic = new Audio('assets/music/jellyfish-background.mp3');
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.32;
-backgroundMusic.preload = 'none';
+backgroundMusic.preload = 'auto';
 let musicManuallyPaused = false;
-let musicReadyToLoad = false;
 function showMusicState(playing) { musicButton.classList.toggle('playing', playing); musicButton.setAttribute('aria-pressed',playing); }
 function pauseBackgroundMusicForMedia() {
   musicManuallyPaused = true;
@@ -141,25 +140,16 @@ async function playBackgroundMusic() {
   if (musicManuallyPaused || !backgroundMusic.paused) return;
   try { await backgroundMusic.play(); showMusicState(true); } catch { showMusicState(false); }
 }
-async function playMusicAfterFont() {
-  if (!musicReadyToLoad) {
-    try { await document.fonts.ready; } catch {}
-    backgroundMusic.preload = 'auto';
-    backgroundMusic.load();
-    musicReadyToLoad = true;
-  }
-  playBackgroundMusic();
-}
 musicButton.addEventListener('click', () => {
-  if (backgroundMusic.paused) { musicManuallyPaused = false; playMusicAfterFont(); }
+  if (backgroundMusic.paused) { musicManuallyPaused = false; playBackgroundMusic(); }
   else { musicManuallyPaused = true; backgroundMusic.pause(); }
 });
 backgroundMusic.addEventListener('pause', () => showMusicState(false));
 backgroundMusic.addEventListener('play', () => showMusicState(true));
-window.addEventListener('load', playMusicAfterFont);
-window.addEventListener('pageshow', playMusicAfterFont);
-document.addEventListener('WeixinJSBridgeReady', playMusicAfterFont, false);
-['pointerdown', 'touchstart', 'keydown'].forEach(event => document.addEventListener(event, playMusicAfterFont, { once:true, passive:true }));
+window.addEventListener('load', playBackgroundMusic);
+window.addEventListener('pageshow', playBackgroundMusic);
+document.addEventListener('WeixinJSBridgeReady', playBackgroundMusic, false);
+['pointerdown', 'touchstart', 'keydown'].forEach(event => document.addEventListener(event, playBackgroundMusic, { once:true, passive:true }));
 
 // React Bits Aurora adapted for this dependency-free static site.
 (() => {
