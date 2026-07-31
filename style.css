@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Mono:wght@400;500&family=ZCOOL+XiaoWei&display=swap');
+@font-face { font-family:'PortfolioKaiTi'; src:url('assets/fonts/kaiti.ttf') format('truetype'); font-display:swap; }
 
 :root { --ink:#25272b; --paper:#fffdf8; --red:#e34a47; --blue:#3098d2; --yellow:#f7ce43; --line:#24272a; }
 * { box-sizing:border-box; }
@@ -103,7 +104,7 @@ nav a:hover, nav a.active { color:var(--red); transform:rotate(-3deg); }
 }
 
 /* Chinese typography: KaiTi for all copy, with a clear title/body hierarchy. */
-:root { --chinese-font: "KaiTi", "STKaiti", "Kaiti SC", serif; }
+:root { --chinese-font: "PortfolioKaiTi", "KaiTi", "STKaiti", "Kaiti SC", serif; }
 body { font-family:var(--chinese-font); font-synthesis:weight; }
 nav a, .home-links button, .page-content h2, .placeholder-card strong,
 .article-card a, .film-details h2, #audio .episode span, .read-script,
