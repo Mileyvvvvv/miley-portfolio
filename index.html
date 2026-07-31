@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miley's Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="aurora-bg" aria-hidden="true"></div>
+    <canvas class="click-sparks" aria-hidden="true"></canvas>
+    <div class="paper-grain"></div>
+    <header class="site-header">
+      <a class="logo" href="#home" aria-label="Miley's Portfolio 首页">MILEY.</a>
+      <nav aria-label="主导航">
+        <a href="#home">首页</a>
+        <a href="#experience">个人经历</a>
+        <a href="#writing">文字类作品</a>
+        <a href="#video">视频类作品</a>
+        <a href="#audio">广播类作品</a>
+      </nav>
+      <button class="music-player" type="button" aria-pressed="false" title="播放背景音乐">
+        <span class="record"><i></i></span><span class="music-label">PLAY<br />MUSIC</span><span class="music-notes" aria-hidden="true"><i>♪</i><i>♫</i><i>♪</i></span>
+      </button>
+    </header>
+
+    <main>
+      <section id="home" class="view home-view" data-view>
+        <div class="collage collage-left">
+          <div class="lamp"><span></span></div>
+          <button class="cutout polaroid photo-a" data-go="experience"><b>🎓</b><span>Personal<br />Experience</span></button>
+          <button class="cutout note note-a" data-go="writing"><b>📚</b><span>Literary<br />Works</span></button>
+          <button class="cutout film" data-go="video"><b>🎬</b><span>VIDEO</span></button>
+        </div>
+        <img class="home-photo home-photo-1" src="assets/home/miley-01.jpg" alt="Miley 在武汉大学" />
+        <img class="home-photo home-photo-2" src="assets/home/miley-02.jpg" alt="Miley 的肖像" />
+        <img class="home-photo home-photo-3" src="assets/home/miley-03.jpg" alt="Miley 在罗马" />
+        <img class="home-photo home-photo-4" src="assets/home/miley-04.jpg" alt="Miley 的生活照片" />
+        <div class="home-copy">
+          <p class="eyebrow">personal portfolio · 2026</p>
+          <h1>Miley's<br />Portfolio</h1>
+          <p class="intro">Hello你好呀～这里是麦麦！<br />这个主页目前还在修缮中，但它已经能装下部分的我。<br />虽然目前还无法呈现出我脑海中的理想态，但这个主页会和我一起成长<br />一起：To be continue...</p>
+          <div class="contact-card"><small>EMAIL ME</small><a href="mailto:mileywww@163.com">mileywww@163.com</a></div>
+        </div>
+        <div class="collage collage-right">
+          <button class="blue-card" data-go="audio"><b>🎙️</b><span>Broadcast</span></button>
+          <div class="cutout swatch"><b>📸</b><span>Photography</span></div>
+          <div class="doodle">✦<br />☻<br />✎</div>
+          <div class="stamp"><b>☕</b><span>To be<br />continue</span></div>
+        </div>
+      </section>
+
+      <section id="experience" class="view book-view" data-view>
+        <div class="book-shell" data-book="experience">
+          <button class="page-turn prev" aria-label="上一页">‹</button>
+          <div class="book">
+            <div class="book-page left-page"><p class="page-number"></p><div class="page-content left-content"></div></div>
+            <div class="rings" aria-hidden="true"></div>
+            <div class="book-page right-page"><p class="page-number"></p><div class="page-content right-content"></div></div>
+          </div>
+          <button class="page-turn next" aria-label="下一页">›</button>
+        </div>
+      </section>
+
+      <section id="writing" class="view book-view" data-view>
+        <div class="book-shell" data-book="writing">
+          <button class="page-turn prev" aria-label="上一页">‹</button>
+          <div class="book"><div class="book-page left-page"><p class="page-number"></p><div class="page-content left-content"></div></div><div class="rings"></div><div class="book-page right-page"><p class="page-number"></p><div class="page-content right-content"></div></div></div>
+          <button class="page-turn next" aria-label="下一页">›</button>
+        </div>
+      </section>
+
+      <section id="video" class="view book-view" data-view>
+        <div class="book-shell single-book"><div class="book"><div class="book-page left-page"><p class="page-number">FILM STILLS · 《副驾驶》</p><div class="stills"></div></div><div class="rings"></div><div class="book-page right-page"><p class="page-number">WATCH · 《副驾驶》</p><div class="video-placeholder"><button class="video-launch" type="button" aria-label="放大播放《副驾驶》"><img src="assets/video/passenger-02.png" alt="《副驾驶》视频封面" /><span>▶</span><small>点击放大播放</small></button></div><div class="film-details"><h2>影片名称《副驾驶》</h2><p><b>影片简介：</b>副驾驶隐喻那些女性成长路上频繁遭遇的——“无法自决的时刻”。</p><p><b>团队担任角色：</b>灯光 + 录音 + 后期助理</p></div></div></div></div>
+      </section>
+
+      <section id="audio" class="view book-view" data-view>
+        <div class="book-shell single-book"><div class="book"><div class="book-page left-page"><p class="page-number">MILEY'S RADIO</p><div class="radio-art">ON<br />AIR<span>〰〰</span></div></div><div class="rings"></div><div class="book-page right-page"><p class="page-number">EPISODES</p><div class="episodes"></div></div></div></div>
+      </section>
+    </main>
+    <div class="video-modal" aria-hidden="true"><div class="modal-card"><button class="close-modal" aria-label="关闭">×</button><iframe class="modal-video" title="《副驾驶》" src="https://www.youtube-nocookie.com/embed/keQ2FBc7teY?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+    <script src="script.js"></script>
+  </body>
+</html>
