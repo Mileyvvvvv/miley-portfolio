@@ -50,7 +50,7 @@ document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>location.hash=b.
 const videoModal = document.querySelector('.video-modal');
 const modalVideo = document.querySelector('.modal-video');
 function closeVideoModal() {
-  modalVideo.src = modalVideo.src;
+  modalVideo.src = 'about:blank';
   videoModal.classList.remove('open');
   videoModal.setAttribute('aria-hidden','true');
 }
