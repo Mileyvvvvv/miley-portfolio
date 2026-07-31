@@ -11,12 +11,12 @@ const pages = {
   ],
   writing: [
     {title:'公众号推文',tag:'ARTICLES / 01–02',articles:[
-      {image:'assets/articles/article-01.png',link:'https://mp.weixin.qq.com/s/BEDbGiGzbrSlZR675aFqvA',label:'大小姐驾到：复古千金感回潮'},
-      {image:'assets/articles/article-02.png',link:'https://mp.weixin.qq.com/s/eOXcarcRB3cWxycgnOjhSg',label:'街拍总火出圈？来抄“世女一”的基础款显贵公式'}
+      {image:'assets/articles/article-01.jpg',link:'https://mp.weixin.qq.com/s/BEDbGiGzbrSlZR675aFqvA',label:'大小姐驾到：复古千金感回潮'},
+      {image:'assets/articles/article-02.jpg',link:'https://mp.weixin.qq.com/s/eOXcarcRB3cWxycgnOjhSg',label:'街拍总火出圈？来抄“世女一”的基础款显贵公式'}
     ]},
     {title:'公众号推文',tag:'ARTICLES / 03–04',articles:[
-      {image:'assets/articles/article-03.png',link:'https://mp.weixin.qq.com/s/QBXvSEBaitBcXKFHYL92Wg',label:'冬日战靴已就位，你选好了吗？'},
-      {image:'assets/articles/article-04.png',link:'https://mp.weixin.qq.com/s/h_8mxDWTxWq2xYs0RXJYdg',label:'冬日必备：一件“能当主角”的柔软毛衣'}
+      {image:'assets/articles/article-03.jpg',link:'https://mp.weixin.qq.com/s/QBXvSEBaitBcXKFHYL92Wg',label:'冬日战靴已就位，你选好了吗？'},
+      {image:'assets/articles/article-04.jpg',link:'https://mp.weixin.qq.com/s/h_8mxDWTxWq2xYs0RXJYdg',label:'冬日必备：一件“能当主角”的柔软毛衣'}
     ]},
     {title:'《此心安处是吾乡》',tag:'SCRIPT / 01',pdf:'assets/writing/this-heart-is-home.pdf',text:'一场车祸夺走年轻夫妻的生命，只留下一个受精胚胎。三位失独父母因胚胎处置权重新联系，却在延续生命与直面伤痛之间产生分歧。随着记忆不断造访，他们最终不再逃避或伪装，各自安放失去孩子的苦痛，重新找到生活的方向与心之所安。'},
     {title:'《白鹭与黄鹂》',tag:'SCRIPT / 02',pdf:'assets/writing/white-egret-and-oriole.pdf',text:'三个来自不同阶层家庭的高三女孩，因为亲缘关系和高考短暂相遇。同处一间教室、共坐一张饭桌，她们却拥有截然不同的资源、眼界与出路。有人出国，有人进入名校，有人艰难复读。故事借三人的成长，展现阶层差异下年轻人的选择、困境与生命韧性。'},
@@ -25,8 +25,8 @@ const pages = {
   ]
 };
 const state = Object.fromEntries(Object.keys(pages).map(k=>[k,0]));
-function card(data, n) { return `<div class="placeholder-card">${data.image ? `<img class="experience-photo" src="${data.image}" alt="${data.title}" />` : ''}<span class="badge">${data.tag}</span><strong>${data.title}${data.pair ? ` ${n ? 'B' : 'A'}`:''}</strong><p>${data.text}</p>${data.pdf ? `<a class="read-script" href="${data.pdf}" target="_blank" rel="noopener">点击阅读完整剧本 ↗</a>` : ''}</div>`; }
-function articleCard(article) { return `<article class="article-card"><img src="${article.image}" alt="${article.label} 封面图" /><a href="${article.link}" target="_blank" rel="noopener">${article.label} ↗</a></article>`; }
+function card(data, n) { return `<div class="placeholder-card">${data.image ? `<img class="experience-photo" src="${data.image}" alt="${data.title}" loading="lazy" decoding="async" />` : ''}<span class="badge">${data.tag}</span><strong>${data.title}${data.pair ? ` ${n ? 'B' : 'A'}`:''}</strong><p>${data.text}</p>${data.pdf ? `<a class="read-script" href="${data.pdf}" target="_blank" rel="noopener">点击阅读完整剧本 ↗</a>` : ''}</div>`; }
+function articleCard(article) { return `<article class="article-card"><img src="${article.image}" alt="${article.label} 封面图" loading="lazy" decoding="async" /><a href="${article.link}" target="_blank" rel="noopener">${article.label} ↗</a></article>`; }
 function renderBook(name) {
   const shell=document.querySelector(`[data-book="${name}"]`), data=pages[name], i=state[name]; if(!shell)return;
   const left=data[i], right=data[i+1];
@@ -44,8 +44,10 @@ document.querySelectorAll('[data-book]').forEach(shell=>{
   shell.querySelector('.next').onclick=()=>{ state[name]=Math.min(state[name]+2,pages[name].length-2);renderBook(name); };
   shell.querySelector('.prev').onclick=()=>{ state[name]=Math.max(state[name]-2,0);renderBook(name); };
 });
-function showView(){ const id=location.hash.slice(1)||'home'; document.querySelectorAll('[data-view]').forEach(v=>v.classList.toggle('active',v.id===id)); document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${id}`)); document.body.classList.toggle('home-mode',id==='home'); window.scrollTo(0,0); }
-window.addEventListener('hashchange',showView);showView();
+function showView(id='home'){ document.querySelectorAll('[data-view]').forEach(v=>v.classList.toggle('active',v.id===id)); document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${id}`)); document.body.classList.toggle('home-mode',id==='home'); window.scrollTo(0,0); }
+function showViewFromHash(){ showView(location.hash.slice(1)||'home'); }
+if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+window.addEventListener('hashchange',showViewFromHash);showView('home');
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>location.hash=b.dataset.go);
 const videoModal = document.querySelector('.video-modal');
 const videoFrameHost = document.querySelector('.video-frame-host');
@@ -76,7 +78,7 @@ const stillPaths = [
   'assets/video/passenger-05.png',
   'assets/video/passenger-06.png'
 ];
-document.querySelector('.stills').innerHTML=stillPaths.map((src,i)=>`<div class="still"><img src="${src}" alt="《副驾驶》剧照 ${i+1}" /></div>`).join('');
+document.querySelector('.stills').innerHTML=stillPaths.map((src,i)=>`<div class="still"><img src="${src}" alt="《副驾驶》剧照 ${i+1}" loading="lazy" decoding="async" /></div>`).join('');
 const audioWorks = [
   { type:'播音作品', title:"Do you know what influences people's first impression", src:'assets/audio/first-impression.mp3' },
   { type:'播音作品', title:"Princesses' Talk", src:'assets/audio/princesses-talk.mp3' },
