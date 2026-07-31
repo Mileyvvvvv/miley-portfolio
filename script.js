@@ -58,6 +58,7 @@ function closeVideoModal() {
   videoModal.setAttribute('aria-hidden','true');
 }
 document.querySelector('.video-launch')?.addEventListener('click',()=>{
+  pauseBackgroundMusicForMedia();
   const frame = document.createElement('iframe');
   frame.className = 'modal-video';
   frame.title = '《副驾驶》';
@@ -91,10 +92,12 @@ let activeEpisode = null, activeEpisodeButton = null;
 episodes.querySelectorAll('.episode-play').forEach(button => button.addEventListener('click', () => {
   const work = audioWorks[Number(button.dataset.index)];
   if (activeEpisodeButton === button) {
-    activeEpisode.paused ? activeEpisode.play() : activeEpisode.pause();
+    if (activeEpisode.paused) { pauseBackgroundMusicForMedia(); activeEpisode.play(); }
+    else activeEpisode.pause();
     return;
   }
   if (activeEpisode) { activeEpisode.pause(); activeEpisode.currentTime = 0; activeEpisodeButton.textContent = '▶'; activeEpisodeButton.classList.remove('playing'); }
+  pauseBackgroundMusicForMedia();
   activeEpisode = new Audio(work.src); activeEpisodeButton = button;
   activeEpisode.addEventListener('ended', () => { button.textContent = '▶'; button.classList.remove('playing'); activeEpisode = null; activeEpisodeButton = null; });
   activeEpisode.addEventListener('play', () => { button.textContent = '❚❚'; button.classList.add('playing'); });
@@ -109,6 +112,10 @@ backgroundMusic.preload = 'none';
 let musicManuallyPaused = false;
 let musicReadyToLoad = false;
 function showMusicState(playing) { musicButton.classList.toggle('playing', playing); musicButton.setAttribute('aria-pressed',playing); }
+function pauseBackgroundMusicForMedia() {
+  musicManuallyPaused = true;
+  backgroundMusic.pause();
+}
 async function playBackgroundMusic() {
   if (musicManuallyPaused || !backgroundMusic.paused) return;
   try { await backgroundMusic.play(); showMusicState(true); } catch { showMusicState(false); }
