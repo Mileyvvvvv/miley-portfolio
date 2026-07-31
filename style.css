@@ -88,7 +88,10 @@ nav a:hover, nav a.active { color:var(--red); transform:rotate(-3deg); }
   .radio-art { width:min(260px,80%); margin:18px auto; font-size:46px; }
   .modal-card { width:94vw; padding:8px; }
   .close-modal { right:-8px; top:-13px; }
+  .view.active { animation:mobile-view-enter .24s ease-out both; }
 }
+
+@keyframes mobile-view-enter { from { opacity:.45; transform:translateX(12px); } to { opacity:1; transform:translateX(0); } }
 
 @media (max-width: 380px) {
   nav { gap:5px 10px; }

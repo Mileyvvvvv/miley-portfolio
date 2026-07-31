@@ -49,6 +49,27 @@ function showViewFromHash(){ showView(location.hash.slice(1)||'home'); }
 if (location.hash) history.replaceState(null, '', location.pathname + location.search);
 window.addEventListener('hashchange',showViewFromHash);showView('home');
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>location.hash=b.dataset.go);
+
+// On phones, swipe horizontally to move between the main portfolio sections.
+const mobileViewOrder = ['home', 'experience', 'writing', 'video', 'audio'];
+let swipeStart = null;
+const isInteractiveTarget = target => target.closest?.('button, a, iframe, input, textarea, select, video');
+document.addEventListener('touchstart', event => {
+  if (!matchMedia('(max-width: 760px)').matches || event.touches.length !== 1 || isInteractiveTarget(event.target)) return;
+  const touch = event.touches[0];
+  swipeStart = { x:touch.clientX, y:touch.clientY };
+}, { passive:true });
+document.addEventListener('touchend', event => {
+  if (!swipeStart || !matchMedia('(max-width: 760px)').matches || event.changedTouches.length !== 1) return;
+  const touch = event.changedTouches[0], dx = touch.clientX - swipeStart.x, dy = touch.clientY - swipeStart.y;
+  swipeStart = null;
+  if (Math.abs(dx) < 65 || Math.abs(dx) <= Math.abs(dy)) return;
+  const currentId = document.querySelector('.view.active')?.id || 'home';
+  const currentIndex = mobileViewOrder.indexOf(currentId);
+  const nextIndex = currentIndex + (dx < 0 ? 1 : -1);
+  if (nextIndex >= 0 && nextIndex < mobileViewOrder.length) location.hash = mobileViewOrder[nextIndex];
+}, { passive:true });
+document.addEventListener('touchcancel', () => { swipeStart = null; }, { passive:true });
 const videoModal = document.querySelector('.video-modal');
 const videoFrameHost = document.querySelector('.video-frame-host');
 const videoEmbedUrl = 'https://www.youtube-nocookie.com/embed/keQ2FBc7teY?autoplay=1&rel=0';
