@@ -48,16 +48,23 @@ function showView(){ const id=location.hash.slice(1)||'home'; document.querySele
 window.addEventListener('hashchange',showView);showView();
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>location.hash=b.dataset.go);
 const videoModal = document.querySelector('.video-modal');
-const modalVideo = document.querySelector('.modal-video');
+const videoFrameHost = document.querySelector('.video-frame-host');
+const videoEmbedUrl = 'https://www.youtube-nocookie.com/embed/keQ2FBc7teY?autoplay=1&rel=0';
 function closeVideoModal() {
-  modalVideo.src = 'about:blank';
+  videoFrameHost.replaceChildren();
   videoModal.classList.remove('open');
   videoModal.setAttribute('aria-hidden','true');
 }
 document.querySelector('.video-launch')?.addEventListener('click',()=>{
+  const frame = document.createElement('iframe');
+  frame.className = 'modal-video';
+  frame.title = '《副驾驶》';
+  frame.src = videoEmbedUrl;
+  frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  frame.allowFullscreen = true;
+  videoFrameHost.replaceChildren(frame);
   videoModal.classList.add('open');
   videoModal.setAttribute('aria-hidden','false');
-  modalVideo.src = 'https://www.youtube-nocookie.com/embed/keQ2FBc7teY?autoplay=1&rel=0';
 });
 document.querySelector('.close-modal').onclick=closeVideoModal;
 videoModal.onclick=e=>{if(e.target===e.currentTarget)closeVideoModal()};
